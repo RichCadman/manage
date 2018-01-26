@@ -1,0 +1,93 @@
+<style>
+.over{
+  width:100%;
+  overflow:auto;
+  /* white-space:pre-wrap;不换行 */
+  /* overflow-x:hidden;内容超出宽度时隐藏超出部分的内容  */
+}
+</style>
+
+<link href="__ROOT__/favicon.ico" type="image/ico" rel="shortcut icon" />
+<!--Header-part-->
+<div id="header">
+  <h1><a href="dashboard.html">员工项目管理系统</a></h1>
+</div>
+<!--close-Header-part--> 
+
+<!--top-Header-menu-->
+<div id="user-nav" class="navbar navbar-inverse">
+  <ul class="nav">
+    <li  class="dropdown" id="profile-messages" ><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><i class="icon icon-user"></i>  <span class="text">Welcome {$_SESSION['userinfo']['username']}</span><b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="__APP__/My/my.html"><i class="icon-user"></i> 个人中心</a></li>
+        <li class="divider"></li>
+        <!-- <li><a href="#"><i class="icon-check"></i> My Tasks</a></li> -->
+        <li class="divider"></li>
+        <li><a href="__APP__/Login/login_out.html"><i class="icon-key"></i> 登出</a></li>
+      </ul>
+    </li>
+    <!-- <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">项目</span> <span class="label label-important">5</span> <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a class="sAdd" title="" href="#"><i class="icon-plus"></i> new message</a></li>
+        <li class="divider"></li>
+        <li><a class="sInbox" title="" href="#"><i class="icon-envelope"></i> inbox</a></li>
+        <li class="divider"></li>
+        <li><a class="sOutbox" title="" href="#"><i class="icon-arrow-up"></i> outbox</a></li>
+        <li class="divider"></li>
+        <li><a class="sTrash" title="" href="#"><i class="icon-trash"></i> trash</a></li>
+      </ul>
+    </li> -->
+    <!-- <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li> -->
+    <li class=""><a title="" href="__APP__/Login/login_out.html"><i class="icon icon-share-alt"></i> <span class="text">登出</span></a></li>
+  </ul>
+</div>
+
+<!--start-top-serch-->
+<div id="search">
+  <if condition="$_SESSION['userinfo']['position_id']==1">
+    <a href="javascript:void();" onclick="cache()" class="btn btn-info" style="margin-bottom:9px;margin-right:15px;">清除缓存</a>
+  </if>
+  <!-- <input type="text" placeholder="Search here..."/>
+  <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button> -->
+</div>
+<!--close-top-serch--> 
+
+<script>
+  function cache(){
+    if(confirm("确定清除吗？")){
+      window.location="__APP__/Index/clear_cache";
+    }
+  }
+</script>
+<!-- 定时弹框提醒项目进度 -->
+<script type="text/javascript">
+   function ajax(){
+        var url="__APP__/Item/remind";
+        $(function(){
+            $.post(url,function(data){
+                //alert(data);
+                /*if(data.statu == 200){
+                  alert(data.msg);
+                }*/
+            })
+        });
+        
+    }
+    setInterval("ajax()",10000);//每隔10秒检查一次
+  </script>
+  <!-- 定时查看推送消息，超过三天自动确认 -->
+<script type="text/javascript">
+   function auto(){
+        var url="__APP__/Remark/auto_hit";
+        $(function(){
+            $.post(url,function(data){
+                //alert(data);
+                /*if(data.statu == 200){
+                  alert(data.msg);
+                }*/
+            })
+        });
+        
+    }
+    setInterval("auto()",10000);//每隔10秒检查一次
+  </script>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>员工项目管理系统</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="__HCSS__/bootstrap.min.css" />
+<link rel="stylesheet" href="__HCSS__/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__HCSS__/uniform.css" />
+<link rel="stylesheet" href="__HCSS__/select2.css" />
+<link rel="stylesheet" href="__HCSS__/matrix-style.css" />
+<link rel="stylesheet" href="__HCSS__/matrix-media.css" />
+<link href="__HPUBLIC__/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+<style>
+  .table td {
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<include file="Public:head" />
+<include file="Public:left" />
+
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 首页</a> <a href="#" class="current">我的项目</a> </div>
+    <h1 style="float:left">我的项目</h1>
+  </div>
+  <div class="container-fluid">
+    <hr>
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>项目名称</th>
+                  <th>工期</th>
+                  <th>开始</th>
+                  <th>结束</th>
+                  <th>工期比</th>
+                  <th>工作者</th>
+                </tr>
+              </thead>
+              <tbody>
+                <foreach name="my_item" item="v" key="k">
+                <tr class="gradeX">
+                  <td>{$k+1}</td>
+                  <td>{$v.name}</td>
+                  <td>{$v.duration}</td>
+                  <if condition="$v['start_time']">
+                    <td><a href="__APP__/Index/item_query/item_id/{$v.item_id}" class="btn btn-info">查看进度</a></td>
+                  <else />
+                    <td><a href="javascript:viod();" onclick="start({$v.id})" class="btn btn-success">点击开始</a></td>
+                  </if>
+
+                  <if condition="$v['end_time']">
+                    <td>{:date("Y-m-d H:i",$v['start_time'])}--{:date("Y-m-d H:i",$v['end_time'])}</td>
+                  <else />
+                    <if condition="$v['start_time']">
+                     <td><a href="javascript:viod();" onclick="ok({$v.id})" class="btn btn-danger">点击完成</a></td>
+                    <else />
+                    <td><a href="" class="btn btn-info">我是个按钮</a></td>
+                    </if>
+                  </if>
+
+                  <if condition="$v['ratio']">
+                    <td>{$v.ratio}</td>
+                  <else />
+                    <td>暂无</td>
+                  </if>
+                  <td>{$v.username}</td>
+                </tr>
+               </foreach>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Footer-part-->
+<include file="Public:foot" />
+<!--end-Footer-part-->
+<script src="__HJS__/jquery.min.js"></script> 
+<script src="__HJS__/jquery.ui.custom.js"></script> 
+<script src="__HJS__/bootstrap.min.js"></script> 
+<script src="__HJS__/jquery.uniform.js"></script> 
+<script src="__HJS__/select2.min.js"></script> 
+<script src="__HJS__/jquery.dataTables.min.js"></script> 
+<script src="__HJS__/matrix.js"></script> 
+<script src="__HJS__/matrix.tables.js"></script>
+
+<script type="text/javascript">
+  // 删除数据方法
+  function del(obj,id){
+    // 发送sql语句
+    if(confirm("确定删除吗？")){
+      $.post('__APP__/Index/item_del',{id:id},function(data){
+        // 判断是否成功
+        if (data.statu==200) {
+          $(obj).parent().parent().remove();
+          alert(data.info);
+        }else{
+          alert(data.info);
+        }
+      });
+    }
+  }
+  //点击完成
+  function ok(id){
+    if(confirm("确定完成吗？")){
+      window.location="__APP__/Index/my_item_ok/id/"+id;
+    }
+  }
+  //点击开始
+  function start(id){
+    if(confirm("确定开始吗？")){
+      window.location="__APP__/Index/my_item_start/id/"+id;
+    }
+  }
+</script>
+</body>
+</html>

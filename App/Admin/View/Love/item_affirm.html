@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="author" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="format-detection" content="telephone=no, email=no" />
+	<meta name="renderer" content="webkit">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+
+	<title>项目完结</title>
+	<link rel="stylesheet" type="text/css" href="__ACSS__/base-v1.3.css">
+	<link rel="stylesheet" type="text/css" href="__ACSS__/style.css">
+</head>
+<body class="customer">
+	<section class="text">
+		{$info.content}
+	</section>
+	<a href="javascript:viod();" onclick="money_ok({$info.id})"><button class="btn">确认</button></a>
+</body>
+</html>
+<script src="__AJS__/jquery.min.js"></script> 
+<script>
+  //确认项目完成
+  function money_ok(id){
+    if(confirm("确定OK吗？")){
+      window.location="__APP__/Love/money_ok/id/"+id;
+    }
+  }
+</script>

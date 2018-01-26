@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="kindeditor/plugins/code/prettify.css" />
+<script charset="utf-8" src="kindeditor/kindeditor.js"></script>
+<script charset="utf-8" src="kindeditor/lang/zh_CN.js"></script>
+<script charset="utf-8" src="kindeditor/plugins/code/prettify.js"></script>
+<script>
+    KindEditor.ready(function(K) {
+        var editor1 = K.create('textarea[name="contents"]', {
+            width: "91.3%", //编辑器的宽度
+            height: "430px", //编辑器的高度
+            filterMode: false, //不会过滤HTML代码
+            resizeType: 0,
+            allowPreviewEmoticons: true,
+            allowImageUpload: true,
+            cssPath: 'kindeditor/plugins/code/prettify.css',
+            uploadJson: 'kindeditor/php/upload_json.php',
+            fileManagerJson: 'kindeditor/php/file_manager_json.php',
+            allowFileManager: true,
+            afterCreate: function() {
+                var self = this;
+                K.ctrl(document, 13, function() {
+                    self.sync();
+                    K('form[name=news]')[0].submit();
+                });
+                K.ctrl(self.edit.doc, 13, function() {
+                    self.sync();
+                    K('form[name=news]')[0].submit();
+                });
+            }
+        });
+        prettyPrint();
+    });
+   
+
+</script>

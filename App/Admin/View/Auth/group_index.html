@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow-x:hidden;overflow-y:auto;">
+<head>
+    <title>权限组总览</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="__ACSS__/bootstrap.min.css" />
+    <link rel="stylesheet" href="__ACSS__/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__ACSS__/uniform.css" />
+    <link rel="stylesheet" href="__ACSS__/select2.css" />
+    <link rel="stylesheet" href="__ACSS__/matrix-style.css" />
+    <link rel="stylesheet" href="__ACSS__/matrix-media.css" />
+    <link href="__APUBLIC__/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+    <style>
+        .table td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<include file="Public:head" />
+<include file="Public:left" />
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 首页</a> <a href="#" class="tip-bottom">权限组管理</a><a href="#" class="current">权限组总览</a> </div>
+        <h1 style="float:left">用户组总览</h1>
+    </div>
+    <div class="container-fluid">
+        <hr>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <div class="over"  >
+                            <table class="table table-bordered data-table" style="overflow:hidden">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>用户组名称</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <foreach name="info" item="v" key="k">
+                                    <tr class="gradeX">
+                                        <td>{$k+1}</td>
+                                        <td>{$v.title}</td>
+                                        <td >
+                                            <a href="__APP__/Auth/group_editor/id/{$v.id}"><button class='btn btn-primary' style="margin-left:10px">编辑</button></a>
+                                        </td>
+                                    </tr>
+                                </foreach>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Footer-part-->
+<include file="Public:foot" />
+<!--end-Footer-part-->
+<script src="__AJS__/jquery.min.js"></script>
+<script src="__AJS__/jquery.ui.custom.js"></script>
+<script src="__AJS__/bootstrap.min.js"></script>
+<script src="__AJS__/jquery.uniform.js"></script>
+<script src="__AJS__/select2.min.js"></script>
+<script src="__AJS__/jquery.dataTables.min.js"></script>
+<script src="__AJS__/matrix.js"></script>
+<script src="__AJS__/matrix.tables.js"></script>
+
+<script type="text/javascript">
+    // 删除数据方法
+    function del(obj,id){
+        // 发送sql语句
+        if(confirm("确定放入回收站吗？")){
+            $.post('__APP__/Users/users_del',{id:id},function(data){
+                // 判断是否成功
+                if (data.statu==200) {
+                    $(obj).parent().parent().remove();
+                    alert(data.info);
+                }else{
+                    alert(data.info);
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>

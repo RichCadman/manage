@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>鼎赞网络科技</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="__HCSS__/bootstrap.min.css" />
+<link rel="stylesheet" href="__HCSS__/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__HCSS__/matrix-style.css" />
+<link rel="stylesheet" href="__HCSS__/matrix-media.css" />
+<link href="__HPUBLIC__/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 首页</a> <a href="#" class="current">设计图</a> </div>
+    <h1 style="float:left">设计图</h1><a href="javascript:viod();" onclick="ok({$info.item_id})" class="btn btn-large btn-success" style="float:right;margin-top:30px;margin-right:800px">确认OK</a>
+
+  </div>
+  <div class="container-fluid"><hr>
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-picture"></i> </span>
+            <h5>设计图</h5>
+          </div>
+          <div class="widget-content">
+            <ul class="thumbnails">
+              {$info.content}
+              <!-- <li class="span2"> <a> <img src="__AIMG__/gallery/imgbox3.jpg" alt="" > </a>
+                <div class="actions"> <a title="" class="" href="#"><i class="icon-pencil"></i></a> <a class="lightbox_trigger" href="__AIMG__/gallery/imgbox3.jpg"><i class="icon-search"></i></a> </div>
+              </li> -->
+              
+              
+            </ul>
+            <a href="javascript:viod();" onclick="danger()" class="btn btn-large btn-danger" style="float:right;margin-top:30px;margin-right:800px">不满意请联系技术</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Footer-part-->
+<include file="Public:foot" />
+<!--end-Footer-part-->
+<script src="__HJS__/jquery.min.js"></script> 
+<script src="__HJS__/jquery.ui.custom.js"></script> 
+<script src="__HJS__/bootstrap.min.js"></script> 
+<script src="__HJS__/matrix.js"></script>
+<script>
+  //点击完成
+  function ok(id){
+    if(confirm("确定OK吗？")){
+      window.location="__APP__/Love/ok/item_id/"+id;
+    }
+  }
+</script>
+</body>
+</html>

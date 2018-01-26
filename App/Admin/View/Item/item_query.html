@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow-x:hidden;overflow-y:auto;">
+<head>
+<title>员工项目管理系统</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="__ACSS__/bootstrap.min.css" />
+<link rel="stylesheet" href="__ACSS__/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__ACSS__/matrix-style.css" />
+<link rel="stylesheet" href="__ACSS__/matrix-media.css" />
+<link href="__APUBLIC__/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<include file="Public:head" />
+<include file="Public:left" />
+<div id="content">
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>  
+    </div>
+  </div>
+  <div class="container-fluid"><hr>
+    <!-- <div class="quick-actions_homepage">
+      <ul class="quick-actions">
+        <li class="bg_lb"> <a hrwork_index.htmlhtml"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> My Dashboard </a> </li>
+        <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Charts</a> </li>
+        <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
+        <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i> Tables</a> </li>
+        <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>
+        <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Forms</a> </li>
+        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Buttons</a> </li>
+        <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>Elements</a> </li>
+        <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> Calendar</a> </li>
+        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Error</a> </li>
+      </ul>
+    </div> -->
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-briefcase"></i> </span>
+            <h5 >项目进度--{$ui.name}</h5>
+          </div>
+          <div class="widget-content">
+            <div class="row-fluid">
+              <!-- <div class="span6">
+                <table class="">
+                  <tbody>
+                    
+                    <foreach name="info" item="v" key="k">
+                    <tr>
+                      <td>{$k}：</td>
+                      <td>{$v}</td>
+                    </tr>
+                    </foreach>
+                    
+                  </tbody>
+                </table>
+              </div> -->
+              <!-- <div class="span6"> -->
+                <!-- <div class="chart"></div> -->
+              <!-- <div class="widget-box"> -->
+                <!-- <div class="widget-title"> <span class="icon"><i class="icon-ok"></i></span>
+                  <h5>项目进度</h5>
+                  <div class="control-group ">
+                    <label class="control-label span6">设计</label>
+                    <div class="controls" >
+                      <select name="user_id_ui">
+                        <option value="0">请选择</option>
+                        <foreach name="UI" item="v">
+                          <option value="{$v.id}">{$v.username}</option>
+                        </foreach>
+                      </select>
+                    </div>
+                  </div>
+                </div> -->
+                <div class="widget-content">
+                  <ul class="unstyled">
+                    <!-- UI分界线 -->
+                    <if condition="$ui['start_time']" >
+                      <if condition="$ui['is_ok']==1" >
+                        <li> <span class="icon24 icomoon-icon-arrow-up-2 green"></span> 设计({$ui.username})--<span style="color:blue">已完工 </span><span class="pull-right strong">{$ui.duration}天</span>
+                          <div class="progress progress-striped ">
+                            <div style="width: 100%;" title="100%" class="bar"></div>
+                          </div>
+                        </li>
+                      <else />
+                        <li> <span class="icon24 icomoon-icon-arrow-up-2 green"></span> 设计({$ui.username})--<span style="color:green">已开工 </span><span class="pull-right strong">{$ui.duration}天</span>
+                          <div class="progress progress-striped ">
+                            <div style="width: {$ui.percent_ui}%;" title="{$ui.percent_ui}%" class="bar"></div>
+                          </div>
+                        </li>
+                      </if>
+                    <else />
+                      <li> <span class="icon24 icomoon-icon-arrow-up-2 green"></span> 设计({$ui.username})--<span style="color:red">未开工 </span><span class="pull-right strong">{$ui.duration}天</span>
+                        <div class="progress progress-striped ">
+                          <div style="width: 0%;" title="0%" class="bar"></div>
+                        </div>
+                      </li>
+                    </if>
+                    <!-- UI分界线 -->
+                    <!-- web分界线 -->
+                    <if condition="$web['start_time']" >
+                      <if condition="$web['is_ok']==1" >
+                        <li> <span class="icon24 icomoon-icon-arrow-up-2 green"></span> 前端({$web.username})--<span style="color:blue">已完工 </span><span class="pull-right strong">{$web.duration}天</span>
+                          <div class="progress progress-success progress-striped ">
+                            <div style="width: 100%;" title="100%" class="bar"></div>
+                          </div>
+                        </li>
+                      <else />
+                        <li> <span class="icon24 icomoon-icon-arrow-up-2 green"></span> 前端({$web.username})--<span style="color:green">已开工 </span><span class="pull-right strong">{$web.duration}天</span>
+                          <div class="progress progress-success progress-striped ">
+                            <div style="width: {$web.percent_ui}%;" title="{$web.percent_ui}%" class="bar"></div>
+                          </div>
+                        </li>
+                      </if>
+                    <else />
+                      <li> <span class="icon24 icomoon-icon-arrow-up-2 green"></span> 前端({$web.username})--<span style="color:red">未开工 </span><span class="pull-right strong">{$web.duration}天</span>
+                        <div class="progress progress-success progress-striped ">
+                          <div style="width: 0%;" title="0%" class="bar"></div>
+                        </div>
+                      </li>
+                    </if>
+                    <!-- web分界线 -->
+                    <!-- 程序分界线 -->
+                    <if condition="$code['start_time']" >
+                      <if condition="$code['is_ok']" >
+                        <li> <span class="icon24 icomoon-icon-arrow-down-2 red"></span> 程序({$code.username})--<span style="color:blue">已完工 </span><span class="pull-right strong">{$code.duration}天</span>
+                          <div class="progress progress-warning progress-striped ">
+                            <div style="width: 100%;" title="100%" class="bar"></div>
+                          </div>
+                        </li>
+                      <else />
+                        <li> <span class="icon24 icomoon-icon-arrow-down-2 red"></span> 程序({$code.username})--<span style="color:green">已开工 </span><span class="pull-right strong">{$code.duration}天</span>
+                          <div class="progress progress-warning progress-striped ">
+                            <div style="width: {$code.percent_ui}%;" title="{$code.percent_ui}%" class="bar"></div>
+                          </div>
+                        </li>
+                      </if>
+                    <else />
+                      <li> <span class="icon24 icomoon-icon-arrow-down-2 red"></span> 程序({$code.username})--<span style="color:red">未开工 </span><span class="pull-right strong">{$code.duration}天</span>
+                        <div class="progress progress-warning progress-striped ">
+                          <div style="width: 0%;" title="0%" class="bar"></div>
+                        </div>
+                      </li>
+                    </if>
+                    <!-- 程序分界线 -->
+                    <!-- 总计分界线 -->
+                    <if condition="$item_info['is_finish'] == 1" >
+                      <li> <span class="icon24 icomoon-icon-arrow-up-2 green"></span> 总计 <span class="pull-right strong">{$item_info.durations}天</span>
+                        <div class="progress progress-danger progress-striped ">
+                          <div style="width: 100%;" title="100%" class="bar"></div>
+                        </div>
+                      </li>
+                    <else />
+                      <li> <span class="icon24 icomoon-icon-arrow-up-2 green"></span> 总计 <span class="pull-right strong">{$item_info.durations}天</span>
+                        <div class="progress progress-danger progress-striped ">
+                          <div style="width: {$item_info.percent_ui}%;" title="{$item_info.percent_ui}%" class="bar"></div>
+                        </div>
+                      </li>
+                    </if>
+                    <!-- 总计分界线 -->
+                  </ul>
+                </div> 
+             <!--  </div> -->
+                 <!-- s<table class="table table-bordered table-invoice">
+                   <tbody>
+                     <tr>
+                     <tr>
+                       <td class="width30">Invoice ID:</td>
+                       <td class="width70"><strong>TD-6546</strong></td>
+                     </tr>
+                     <tr>
+                       <td>Issue Date:</td>
+                       <td><strong>March 23, 2013</strong></td>
+                     </tr>
+                     <tr>
+                       <td>Due Date:</td>
+                       <td><strong>April 01, 2013</strong></td>
+                     </tr>
+                   <td class="width30">Client Address:</td>
+                     <td class="width70"><strong>Cliente Company name.</strong> <br>
+                       501 Mafia Street., washington, <br>
+                       NYNC 3654 <br>
+                       Contact No: 123 456-7890 <br>
+                       Email: youremail@companyname.com </td>
+                   </tr>
+                     </tbody>
+                   
+                                  </table> --> 
+              <!-- </div> -->
+            </div>
+            <div class="row-fluid">
+              <div class="span12">
+                
+                <!-- <table class="table table-bordered table-invoice-full">
+                  <thead>
+                    <tr>
+                      <th class="head0">Type</th>
+                      <th class="head1">Desc</th>
+                      <th class="head0 right">Qty</th>
+                      <th class="head1 right">Price</th>
+                      <th class="head0 right">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Firefox</td>
+                      <td>Ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae</td>
+                      <td class="right">2</td>
+                      <td class="right">$150</td>
+                      <td class="right"><strong>$300</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Chrome Plugin</td>
+                      <td>Tro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt u eos et accusamus et iusto odio dignissimos ducimus  deleniti atque</td>
+                      <td class="right">1</td>
+                      <td class="right">$1,200</td>
+                      <td class="right"><strong>$1,2000</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Safari App</td>
+                      <td>Rro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt u expedita distinctio</td>
+                      <td class="right">2</td>
+                      <td class="right">$850</td>
+                      <td class="right"><strong>$1,700</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Opera App</td>
+                      <td>Orro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut</td>
+                      <td class="right">3</td>
+                      <td class="right">$850</td>
+                      <td class="right"><strong>$2,550</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Netscape Template</td>
+                      <td>Vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</td>
+                      <td class="right">5</td>
+                      <td class="right">$50</td>
+                      <td class="right"><strong>$250</strong></td>
+                    </tr>
+                  </tbody>
+                </table> -->
+                <!-- <table class="table table-bordered table-invoice-full">
+                  <tbody>
+                    <tr>
+                      <td class="msg-invoice" width="85%"><h4>Payment method: </h4>
+                        <a href="#" class="tip-bottom" title="Wire Transfer">Wire transfer</a> |  <a href="#" class="tip-bottom" title="Bank account">Bank account #</a> |  <a href="#" class="tip-bottom" title="SWIFT code">SWIFT code </a>|  <a href="#" class="tip-bottom" title="IBAN Billing address">IBAN Billing address </a></td>
+                      <td class="right"><strong>Subtotal</strong> <br>
+                        <strong>Tax (5%)</strong> <br>
+                        <strong>Discount</strong></td>
+                      <td class="right"><strong>$7,000 <br>
+                        $600 <br>
+                        $50</strong></td>
+                    </tr>
+                  </tbody>
+                </table> -->
+                <!-- <div class="pull-right">
+                  <h4><span>Amount Due:</span> $7,650.00</h4>
+                  <br>
+                  <a class="btn btn-primary btn-large pull-right" href="#">Pay Invoice</a> 
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Footer-part-->
+<include file="Public:foot" />
+<!--end-Footer-part--> 
+<script src="__AJS__/jquery.min.js"></script> 
+<script src="__AJS__/jquery.ui.custom.js"></script> 
+<script src="__AJS__/bootstrap.min.js"></script> 
+<script src="__AJS__/matrix.js"></script>
+</body>
+</html>

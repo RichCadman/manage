@@ -1,0 +1,44 @@
+<!--sidebar-menu-->
+<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> 菜单栏</a>
+    <ul>
+        <li class="{$current=='index'?'active':''}"><a href="__APP__/Index/index.html"><i class="icon icon-dashboard"></i> <span>仪表盘</span></a> </li>
+        <foreach name="menu" item="v">
+            <!--判断是否有权限显示-->
+            <if condition="in_array($v['id'],$menu_array)">
+                <li class="submenu {$current=='item'?'active':''}">
+                    <if condition="$v['p_id'] == 0">
+                        <a href="#"><i class="icon {$v.icon}"></i> <span>{$v.title}</span></a>
+                        <ul style="display:{$display == $v['controller'] ? 'block' : 'none'}">
+                            <foreach name="menu" item="vv">
+                                <if condition="$vv['p_id'] == $v['id']">
+                                    <!--判断是否有权限显示-->
+                                    <if condition="in_array($vv['id'],$rule_array)">
+                                        <li class="{$current == $vv['function'] ? 'active' : ''}"><a href="__APP__/{$vv.controller}/{$vv.function}.html">{$vv.title}</a></li>
+                                    </if>
+                                    <!--判断是否有权限显示-->
+                                </if>
+                            </foreach>
+                        </ul>
+                    </if>
+                </li>
+            </if>
+            <!--判断是否有权限显示-->
+        </foreach>
+        <!-- <li class="content"> <span>Monthly Bandwidth Transfer</span>
+          <div class="progress progress-mini progress-danger active progress-striped">
+            <div style="width: 77%;" class="bar"></div>
+          </div>
+          <span class="percent">77%</span>
+          <div class="stat">21419.94 / 14000 MB</div>
+        </li>
+
+        <li class="content"> <span>Disk Space Usage</span>
+          <div class="progress progress-mini active progress-striped">
+            <div style="width: 87%;" class="bar"></div>
+          </div>
+          <span class="percent">87%</span>
+          <div class="stat">604.44 / 4000 MB</div>
+        </li> -->
+
+    </ul>
+</div>

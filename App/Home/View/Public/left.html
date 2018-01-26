@@ -1,0 +1,108 @@
+<!--sidebar-menu-->
+<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
+  <ul>
+    <li class="{$current=='index'?'active':''}"><a href="__APP__/Index/index.html"><i class="icon icon-dashboard"></i> <span>仪表盘</span></a> </li>
+    <if condition="$_SESSION['userinfo']['position_id'] != 1">
+      <li class="{$current=='my_item'?'active':''}"> <a href="__APP__/Index/my_item.html"><i class="icon icon-list"></i> <span>我的项目</span></a> </li>
+    </if>
+    <if condition="$_SESSION['userinfo']['position_id'] == 2">
+      <li class="{$current=='upload_img'?'active':''}"> <a href="__APP__/Index/upload_img.html"><i class="icon icon-picture"></i> <span>上传效果图</span></a> </li>
+    </if>
+    <if condition="$_SESSION['userinfo']['position_id'] == 1">
+      <li class="submenu {$current=='item'?'active':''}"> <a href="#"><i class="icon icon-th-list"></i> <span>项目管理</span> <span class="label label-important">2</span></a>
+        <ul style="display:{$display=='item'?'block':'none'}">
+         <li class="{$current=='item_index'?'active':''}"><a href="__APP__/Index/item_index.html">项目总览</a></li>
+          <li class="{$current=='item_add'?'active':''}"><a href="__APP__/Index/item_add.html">添加项目</a></li>
+          <!-- <li class="{$current=='item_add'?'active':''}"><a href="__APP__/Index/item_allot.html">项目分配</a></li> -->
+        </ul>
+      </li>
+
+      <li class="submenu {$current=='users'?'active':''}"> <a href="#"><i class="icon  icon-group"></i> <span>员工管理</span> <span class="label label-important">2</span></a>
+        <ul style="display:{$display=='users'?'block':'none'}">
+         <li class="{$current=='users_index'?'active':''}"><a href="__APP__/Index/users_index.html">员工总览</a></li>
+          <li class="{$current=='users_add'?'active':''}"><a href="__APP__/Index/users_add.html">添加员工</a></li>
+          <!-- <li><a href="__APP__/Index/form_wizard.html">Form with Wizard</a></li> -->
+        </ul>
+      </li>
+      
+      <!-- <li class="submenu {$current=='position'?'active':''}"> <a href="#"><i class="icon icon-th-list"></i> <span>职位管理</span> <span class="label label-important">3</span></a>
+        <ul>
+         <li class="{$current=='position_index'?'active':''}"><a href="__APP__/Index/position_index.html">职位总览</a></li>
+          <li class="{$current=='position_add'?'active':''}"><a href="__APP__/Index/position_add.html">添加职位</a></li>
+          <li><a href="__APP__/Index/form_wizard.html">Form with Wizard</a></li>
+        </ul>
+      </li> -->
+      
+      <!-- <li class="submenu {$current=='authority'?'active':''}"> <a href="#"><i class="icon icon-th-list"></i> <span>权限管理</span> <span class="label label-important">3</span></a>
+        <ul>
+         <li class="{$current=='authority_index'?'active':''}"><a href="__APP__/Index/authority_index.html">权限总览</a></li>
+          <li class="{$current=='authority_add'?'active':''}"><a href="__APP__/Index/authority_add.html">添加权限</a></li>
+          <li><a href="__APP__/Index/form_wizard.html">Form with Wizard</a></li>
+        </ul>
+      </li> -->
+      
+
+      <li class="{$current=='log'?'active':''}"> <a href="__APP__/Index/log.html"><i class="icon icon-time"></i> <span>日志总览</span></a> </li>
+      
+      <li class="{$current=='performance'?'active':''}"> <a href="__APP__/Index/performance.html"><i class="icon icon-bar-chart"></i> <span>绩效总览</span></a> </li>
+    </if>
+
+    
+    <li class="{$current=='my'?'active':''}"> <a href="__APP__/Index/my.html"><i class="icon icon-user"></i> <span>个人中心</span></a> </li>
+
+    <li class="{$current=='password'?'active':''}"> <a href="__APP__/Index/password.html"><i class="icon  icon-pencil"></i> <span>修改密码</span></a> </li>
+
+   <!--  <li><a href="__APP__/Index/table.html"><i class="icon icon-th"></i> <span>Tables</span></a></li>
+   
+   <li><a href="__APP__/Index/full.html"><i class="icon icon-fullscreen"></i> <span>Full width</span></a></li>
+   
+   <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Forms</span> <span class="label label-important">3</span></a>
+     <ul>
+      <li><a href="__APP__/Index/form_common.html">Basic Form</a></li>
+       <li><a href="__APP__/Index/form_validation.html">Form with Validation</a></li>
+       <li><a href="__APP__/Index/form_wizard.html">Form with Wizard</a></li>
+     </ul>
+   </li>
+   
+   <li><a href="__APP__/Index/buttons.html"><i class="icon icon-tint"></i> <span>Buttons &amp; icons</span></a></li>
+   
+   <li><a href="__APP__/Index/interface1.html"><i class="icon icon-pencil"></i> <span>Eelements</span></a></li>
+   
+   <li class="submenu"> <a href="#"><i class="icon icon-file"></i> <span>Addons</span> <span class="label label-important">5</span></a>
+     <ul>
+       <li><a href="__APP__/Index/index2.html">Dashboard2</a></li>
+       <li><a href="__APP__/Index/gallery.html">Gallery</a></li>
+       <li><a href="__APP__/Index/calendar.html">Calendar</a></li>
+       <li><a href="__APP__/Index/invoice.html">Invoice</a></li>
+       <li><a href="__APP__/Index/chat.html">Chat option</a></li>
+     </ul>
+   
+   </li>
+   
+   <li class="submenu"> <a href="#"><i class="icon icon-info-sign"></i> <span>Error</span> <span class="label label-important">4</span></a>
+     <ul>
+       <li><a href="__APP__/Index/error403.html">Error 403</a></li>
+       <li><a href="__APP__/Index/error404.html">Error 404</a></li>
+       <li><a href="__APP__/Index/error405.html">Error 405</a></li>
+       <li><a href="__APP__/Index/error500.html">Error 500</a></li>
+     </ul>
+   </li>
+   
+   <li class="content"> <span>Monthly Bandwidth Transfer</span>
+     <div class="progress progress-mini progress-danger active progress-striped">
+       <div style="width: 77%;" class="bar"></div>
+     </div>
+     <span class="percent">77%</span>
+     <div class="stat">21419.94 / 14000 MB</div>
+   </li>
+   
+   <li class="content"> <span>Disk Space Usage</span>
+     <div class="progress progress-mini active progress-striped">
+       <div style="width: 87%;" class="bar"></div>
+     </div>
+     <span class="percent">87%</span>
+     <div class="stat">604.44 / 4000 MB</div>
+   </li> -->
+  
+  </ul>
+</div>

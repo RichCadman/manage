@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow-x:hidden;overflow-y:auto;">
+<head>
+    <title>添加规则</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="__ACSS__/bootstrap.min.css" />
+    <link rel="stylesheet" href="__ACSS__/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__ACSS__/colorpicker.css" />
+    <link rel="stylesheet" href="__ACSS__/datepicker.css" />
+    <link rel="stylesheet" href="__ACSS__/uniform.css" />
+    <link rel="stylesheet" href="__ACSS__/select2.css" />
+    <link rel="stylesheet" href="__ACSS__/matrix-style.css" />
+    <link rel="stylesheet" href="__ACSS__/matrix-media.css" />
+    <link rel="stylesheet" href="__ACSS__/bootstrap-wysihtml5.css" />
+    <link href="__APUBLIC__/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="__KIND__/themes/default/default.css" />
+    <link rel="stylesheet" href="__KIND__/plugins/code/prettify.css" />
+    <script charset="utf-8" src="__KIND__/kindeditor.js"></script>
+    <script charset="utf-8" src="__KIND__/lang/zh_CN.js"></script>
+    <script charset="utf-8" src="__KIND__/plugins/code/prettify.js"></script>
+    <script>
+        KindEditor.ready(function(K) {
+            var editor1 = K.create('textarea[name="describe"]', {
+                width: "91.3%", //编辑器的宽度
+                height: "430px", //编辑器的高度
+                filterMode: false, //不会过滤HTML代码
+                resizeType: 0,
+                allowPreviewEmoticons: true,
+                allowImageUpload: true,
+                cssPath: '__KIND__/plugins/code/prettify.css',
+                uploadJson: '__KIND__/php/upload_json.php',
+                fileManagerJson: '__KIND__/php/file_manager_json.php',
+                allowFileManager: true,
+                afterCreate: function() {
+                    var self = this;
+                    K.ctrl(document, 13, function() {
+                        self.sync();
+                        K('form[name=news]')[0].submit();
+                    });
+                    K.ctrl(self.edit.doc, 13, function() {
+                        self.sync();
+                        K('form[name=news]')[0].submit();
+                    });
+                }
+            });
+            prettyPrint();
+        });
+
+
+    </script>
+</head>
+<body>
+
+<include file="Public:head" />
+<include file="Public:left" />
+<!--close-left-menu-stats-sidebar-->
+
+<div id="content">
+    <div id="content-header">
+        <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 首页</a> <a href="#" class="tip-bottom">规则管理</a> <a href="#" class="current">添加规则</a> </div>
+        <h1>添加规则</h1>
+    </div>
+    <div class="container-fluid">
+        <hr>
+        <div class="row-fluid">
+            <div class="span6">
+
+
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form action="__APP__/Auth/add_rule_do" method="post" class="form-horizontal" enctype="multipart/form-data" >
+
+                            <div class="control-group">
+                                <label class="control-label">规则名称</label>
+                                <div class="controls">
+                                    <input type="text" class="span6" name="title" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">规则</label>
+                                <div class="controls">
+                                    <input type="text" class="span6" name="name" />
+                                </div>
+                            </div>
+
+                            <div class="control-group ">
+                                <label class="control-label span6">父级规则</label>
+                                <div class="controls">
+                                    <select name="p_id">
+                                        <option value="0">--顶级规则--</option>
+                                        <foreach name="info" item="v">
+                                            <if condition="$v['p_id'] == 0">
+                                                <option value="{$v.id}">&nbsp;&nbsp;|--{$v.title}</option>
+                                                <foreach name="info" item="vv">
+                                                    <if condition="$vv['p_id'] == $v['id']">
+                                                        <option value="{$vv.id}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--{$vv.title}</option>
+                                                    </if>
+                                                </foreach>
+                                            </if>
+
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">导航</label>
+                                <div class="controls">
+                                    <input type="text" class="span6" name="nav" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">是否显示</label>
+                                <div class="controls">
+                                    <label>
+                                        <input type="radio" name="is_visible" value="1"/>
+                                        显示</label>
+                                    <label>
+                                        <input type="radio" name="is_visible" checked value="2" />
+                                        隐藏</label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">菜单图标</label>
+                                <div class="controls">
+                                    <input type="text" class="span6" name="icon" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">控制器标识</label>
+                                <div class="controls">
+                                    <input type="text" class="span6" name="controller" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">方法标识</label>
+                                <div class="controls">
+                                    <input type="text" class="span6" name="function" />
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-success">添加</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div></div>
+<!--Footer-part-->
+<include file="Public:foot" />
+<!--end-Footer-part-->
+<script src="__AJS__/jquery.min.js"></script>
+<script src="__AJS__/jquery.ui.custom.js"></script>
+<script src="__AJS__/bootstrap.min.js"></script>
+<script src="__AJS__/bootstrap-colorpicker.js"></script>
+<script src="__AJS__/bootstrap-datepicker.js"></script>
+<script src="__AJS__/jquery.toggle.buttons.html"></script>
+<script src="__AJS__/masked.js"></script>
+<script src="__AJS__/jquery.uniform.js"></script>
+<script src="__AJS__/select2.min.js"></script>
+<script src="__AJS__/matrix.js"></script>
+<script src="__AJS__/matrix.form_common.js"></script>
+<script src="__AJS__/wysihtml5-0.3.0.js"></script>
+<script src="__AJS__/jquery.peity.min.js"></script>
+<script src="__AJS__/bootstrap-wysihtml5.js"></script>
+<script>
+    /*$('.textarea_editor').wysihtml5();*/
+</script>
+</body>
+</html>
